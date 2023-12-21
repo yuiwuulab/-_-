@@ -1,0 +1,376 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DBHWModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Card">
+          <Key>
+            <PropertyRef Name="cId" />
+          </Key>
+          <Property Name="cId" Type="int" Nullable="false" />
+          <Property Name="cName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contains">
+          <Key>
+            <PropertyRef Name="cId" />
+            <PropertyRef Name="tId" />
+          </Key>
+          <Property Name="cId" Type="int" Nullable="false" />
+          <Property Name="tId" Type="int" Nullable="false" />
+          <Property Name="num" Type="int" Nullable="false" />
+          <Property Name="price" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="mId" />
+          </Key>
+          <Property Name="mId" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sex" Type="bit" />
+          <Property Name="birthday" Type="date" />
+          <Property Name="phone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="isManager" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Owns">
+          <Key>
+            <PropertyRef Name="mId" />
+            <PropertyRef Name="cId" />
+          </Key>
+          <Property Name="mId" Type="int" Nullable="false" />
+          <Property Name="cId" Type="int" Nullable="false" />
+          <Property Name="num" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="tId" />
+          </Key>
+          <Property Name="tId" Type="int" Nullable="false" />
+          <Property Name="mId" Type="int" Nullable="false" />
+          <Property Name="tName" Type="nvarchar(max)" />
+          <Property Name="tDate" Type="date" Nullable="false" />
+          <Property Name="payment" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Contains__cId__4222D4EF">
+          <End Role="Card" Type="Self.Card" Multiplicity="1" />
+          <End Role="Contains" Type="Self.Contains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Card">
+              <PropertyRef Name="cId" />
+            </Principal>
+            <Dependent Role="Contains">
+              <PropertyRef Name="cId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contains__tId__4316F928">
+          <End Role="Transaction" Type="Self.Transaction" Multiplicity="1" />
+          <End Role="Contains" Type="Self.Contains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transaction">
+              <PropertyRef Name="tId" />
+            </Principal>
+            <Dependent Role="Contains">
+              <PropertyRef Name="tId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Owns__cId__3F466844">
+          <End Role="Card" Type="Self.Card" Multiplicity="1" />
+          <End Role="Owns" Type="Self.Owns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Card">
+              <PropertyRef Name="cId" />
+            </Principal>
+            <Dependent Role="Owns">
+              <PropertyRef Name="cId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Owns__mId__3E52440B">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Owns" Type="Self.Owns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="mId" />
+            </Principal>
+            <Dependent Role="Owns">
+              <PropertyRef Name="mId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transaction__mId__398D8EEE">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="mId" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="mId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBHWModelStoreContainer">
+          <EntitySet Name="Card" EntityType="Self.Card" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contains" EntityType="Self.Contains" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Owns" EntityType="Self.Owns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Contains__cId__4222D4EF" Association="Self.FK__Contains__cId__4222D4EF">
+            <End Role="Card" EntitySet="Card" />
+            <End Role="Contains" EntitySet="Contains" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contains__tId__4316F928" Association="Self.FK__Contains__tId__4316F928">
+            <End Role="Transaction" EntitySet="Transaction" />
+            <End Role="Contains" EntitySet="Contains" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Owns__cId__3F466844" Association="Self.FK__Owns__cId__3F466844">
+            <End Role="Card" EntitySet="Card" />
+            <End Role="Owns" EntitySet="Owns" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Owns__mId__3E52440B" Association="Self.FK__Owns__mId__3E52440B">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Owns" EntitySet="Owns" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transaction__mId__398D8EEE" Association="Self.FK__Transaction__mId__398D8EEE">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Transaction" EntitySet="Transaction" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBHWModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Card">
+          <Key>
+            <PropertyRef Name="cId" />
+          </Key>
+          <Property Name="cId" Type="Int32" Nullable="false" />
+          <Property Name="cName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Contains" Relationship="Self.FK__Contains__cId__4222D4EF" FromRole="Card" ToRole="Contains" />
+          <NavigationProperty Name="Owns" Relationship="Self.FK__Owns__cId__3F466844" FromRole="Card" ToRole="Owns" />
+        </EntityType>
+        <EntityType Name="Contains">
+          <Key>
+            <PropertyRef Name="cId" />
+            <PropertyRef Name="tId" />
+          </Key>
+          <Property Name="cId" Type="Int32" Nullable="false" />
+          <Property Name="tId" Type="Int32" Nullable="false" />
+          <Property Name="num" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Card" Relationship="Self.FK__Contains__cId__4222D4EF" FromRole="Contains" ToRole="Card" />
+          <NavigationProperty Name="Transaction" Relationship="Self.FK__Contains__tId__4316F928" FromRole="Contains" ToRole="Transaction" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="mId" />
+          </Key>
+          <Property Name="mId" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sex" Type="Boolean" />
+          <Property Name="birthday" Type="DateTime" Precision="0" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isManager" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Owns" Relationship="Self.FK__Owns__mId__3E52440B" FromRole="Member" ToRole="Owns" />
+          <NavigationProperty Name="Transaction" Relationship="Self.FK__Transaction__mId__398D8EEE" FromRole="Member" ToRole="Transaction" />
+        </EntityType>
+        <EntityType Name="Owns">
+          <Key>
+            <PropertyRef Name="mId" />
+            <PropertyRef Name="cId" />
+          </Key>
+          <Property Name="mId" Type="Int32" Nullable="false" />
+          <Property Name="cId" Type="Int32" Nullable="false" />
+          <Property Name="num" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Card" Relationship="Self.FK__Owns__cId__3F466844" FromRole="Owns" ToRole="Card" />
+          <NavigationProperty Name="Member" Relationship="Self.FK__Owns__mId__3E52440B" FromRole="Owns" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="tId" />
+          </Key>
+          <Property Name="tId" Type="Int32" Nullable="false" />
+          <Property Name="mId" Type="Int32" Nullable="false" />
+          <Property Name="tName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="payment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Contains" Relationship="Self.FK__Contains__tId__4316F928" FromRole="Transaction" ToRole="Contains" />
+          <NavigationProperty Name="Member" Relationship="Self.FK__Transaction__mId__398D8EEE" FromRole="Transaction" ToRole="Member" />
+        </EntityType>
+        <Association Name="FK__Contains__cId__4222D4EF">
+          <End Role="Card" Type="Self.Card" Multiplicity="1" />
+          <End Role="Contains" Type="Self.Contains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Card">
+              <PropertyRef Name="cId" />
+            </Principal>
+            <Dependent Role="Contains">
+              <PropertyRef Name="cId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Owns__cId__3F466844">
+          <End Role="Card" Type="Self.Card" Multiplicity="1" />
+          <End Role="Owns" Type="Self.Owns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Card">
+              <PropertyRef Name="cId" />
+            </Principal>
+            <Dependent Role="Owns">
+              <PropertyRef Name="cId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contains__tId__4316F928">
+          <End Role="Transaction" Type="Self.Transaction" Multiplicity="1" />
+          <End Role="Contains" Type="Self.Contains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transaction">
+              <PropertyRef Name="tId" />
+            </Principal>
+            <Dependent Role="Contains">
+              <PropertyRef Name="tId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Owns__mId__3E52440B">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Owns" Type="Self.Owns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="mId" />
+            </Principal>
+            <Dependent Role="Owns">
+              <PropertyRef Name="mId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transaction__mId__398D8EEE">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="mId" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="mId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBFinal7Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Card" EntityType="Self.Card" />
+          <EntitySet Name="Contains" EntityType="Self.Contains" />
+          <EntitySet Name="Member" EntityType="Self.Member" />
+          <EntitySet Name="Owns" EntityType="Self.Owns" />
+          <EntitySet Name="Transaction" EntityType="Self.Transaction" />
+          <AssociationSet Name="FK__Contains__cId__4222D4EF" Association="Self.FK__Contains__cId__4222D4EF">
+            <End Role="Card" EntitySet="Card" />
+            <End Role="Contains" EntitySet="Contains" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Owns__cId__3F466844" Association="Self.FK__Owns__cId__3F466844">
+            <End Role="Card" EntitySet="Card" />
+            <End Role="Owns" EntitySet="Owns" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contains__tId__4316F928" Association="Self.FK__Contains__tId__4316F928">
+            <End Role="Transaction" EntitySet="Transaction" />
+            <End Role="Contains" EntitySet="Contains" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Owns__mId__3E52440B" Association="Self.FK__Owns__mId__3E52440B">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Owns" EntitySet="Owns" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transaction__mId__398D8EEE" Association="Self.FK__Transaction__mId__398D8EEE">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Transaction" EntitySet="Transaction" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBHWModelStoreContainer" CdmEntityContainer="DBFinal7Entities">
+          <EntitySetMapping Name="Card">
+            <EntityTypeMapping TypeName="DBHWModel.Card">
+              <MappingFragment StoreEntitySet="Card">
+                <ScalarProperty Name="cId" ColumnName="cId" />
+                <ScalarProperty Name="cName" ColumnName="cName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contains">
+            <EntityTypeMapping TypeName="DBHWModel.Contains">
+              <MappingFragment StoreEntitySet="Contains">
+                <ScalarProperty Name="cId" ColumnName="cId" />
+                <ScalarProperty Name="tId" ColumnName="tId" />
+                <ScalarProperty Name="num" ColumnName="num" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Member">
+            <EntityTypeMapping TypeName="DBHWModel.Member">
+              <MappingFragment StoreEntitySet="Member">
+                <ScalarProperty Name="mId" ColumnName="mId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="isManager" ColumnName="isManager" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Owns">
+            <EntityTypeMapping TypeName="DBHWModel.Owns">
+              <MappingFragment StoreEntitySet="Owns">
+                <ScalarProperty Name="mId" ColumnName="mId" />
+                <ScalarProperty Name="cId" ColumnName="cId" />
+                <ScalarProperty Name="num" ColumnName="num" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transaction">
+            <EntityTypeMapping TypeName="DBHWModel.Transaction">
+              <MappingFragment StoreEntitySet="Transaction">
+                <ScalarProperty Name="tId" ColumnName="tId" />
+                <ScalarProperty Name="mId" ColumnName="mId" />
+                <ScalarProperty Name="tName" ColumnName="tName" />
+                <ScalarProperty Name="tDate" ColumnName="tDate" />
+                <ScalarProperty Name="payment" ColumnName="payment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,119 @@
+﻿@model DBMVCFinal.ViewModels.CTCModel
+
+@{
+    ViewBag.Title = "MoreDetails";
+
+    List<int> cIdList = new List<int>();
+    foreach (var i in Model.ContainData)
+    {
+        cIdList.Add(i.cId);
+    }
+
+    List<string> cNameList = new List<string>();
+    foreach (var i in Model.ContainData)
+    {
+        foreach (var j in Model.CardData)
+        {
+            if (i.cId == j.cId)
+            {
+                cNameList.Add(j.cName);
+            }
+        }
+
+    }
+
+    List<int> numList = new List<int>();
+    foreach (var i in Model.ContainData)
+    {
+
+        numList.Add(i.num);
+
+    }
+
+    List<int> priceList = new List<int>();
+    foreach (var i in Model.ContainData)
+    {
+        priceList.Add(i.price);
+
+    }
+
+
+}
+
+<h2>MoreDetails</h2>
+<h4>@Html.DisplayFor(model => model.TransactionData.tId)</h4>
+<div>
+    @*<h4>CTCModel</h4>*@
+    <hr />
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>卡片ID</th>
+                <th>卡片名稱</th>
+                <th>數量</th>
+                <th>價格</th>
+                <th>交易方式</th>
+                <th>交易日期</th>
+            </tr>
+
+        </thead>
+        <tbody style="background-color: #E7ECE9 ">
+            @for (int a = 0; a < cIdList.Count; a++)
+            {
+                <tr>
+                    <td>@cIdList[a]</td>
+                    <td>@cNameList[a]</td>
+                    <td>@numList[a]</td>
+                    <td>@priceList[a]</td>
+                    <td>@Html.DisplayFor(model => model.TransactionData.payment)</td>
+                    <td>@Html.DisplayFor(model => model.TransactionData.tDate)</td>
+                </tr>
+            }
+
+        </tbody>
+
+
+    </table>
+
+
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |*@
+    @Html.ActionLink("回到交易紀錄", "OwnTransactionDetails", "DBFinal", null, htmlAttributes: new { @style = "background-color: #91B0A0; color:white ", @class = "btn btn-default" })
+</p>
+
+
+@section topCSS{
+    <style>
+
+        body {
+            background-color: #CDD5D1;
+        }
+
+        /*設定caption*/
+        .table > caption {
+            margin-top: 10px;
+            color: white;
+            background-color: #698581;
+            font-size: xx-large;
+        }
+
+        /*設定thead顏色*/
+        .table > thead > tr {
+            color: white;
+            background-color: #809B8E;
+        }
+
+        /*設定tfoot顏色及文字對齊*/
+        .table > tfoot > tr {
+            color: white;
+            background-color: #698581;
+        }
+
+        /*設定文字對齊*/
+        .table > caption, .table > thead > tr > th, .table > tfoot > tr {
+            text-align: center;
+        }
+    </style>
+}

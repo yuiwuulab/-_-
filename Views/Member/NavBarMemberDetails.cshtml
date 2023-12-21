@@ -1,0 +1,130 @@
+﻿@model DBMVCFinal.Models.Member
+
+@{
+    ViewBag.Title = "NavBarMemberDetails";
+}
+
+<h2>NavBarMemberDetails</h2>
+
+<div>
+    <h4>Member</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sex)
+        </dt>
+
+        <dd>
+            @if (Model.sex == true)
+            {
+                @Html.Raw("男")
+            }
+            else
+            {
+                @Html.Raw("女")
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.birthday)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.birthday)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isManager)
+        </dt>
+
+        <dd>
+            @if (Model.isManager == true)
+            {
+                @Html.Raw("管理者")
+            }
+            else
+            {
+                @Html.Raw("使用者")
+            }
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { Id = Model.mId },  htmlAttributes: new { @style = "background-color: #91B0A0; color:white ", @class = "btn btn-default" })
+    @*@Html.ActionLink("Back to List", "Index")*@
+</p>
+
+
+@section topCSS{
+    <style>
+
+        body {
+            background-color: #CDD5D1;
+        }
+
+        .dl-horizontal {
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        dt {
+            color: white;
+            background-color: #809B8E !important;
+            border-width: 1px !important;
+            border-style: solid;
+            padding-right: 15px !important;
+        }
+
+        dd {
+            border-bottom-width: 2px !important;
+            border-color: gray !important;
+            border-bottom: dashed;
+            padding-left: 20px;
+        }
+
+        .dl-horizontal > dt, .dl-horizontal > dd {
+            border-radius: 3px 3px 3px 3px !important;
+            font-size: larger;
+            line-height: 25px !important;
+            vertical-align: central;
+            padding: 3px;
+        }
+    </style>
+}
+
+
+
+

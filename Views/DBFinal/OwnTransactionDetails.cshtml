@@ -1,0 +1,83 @@
+﻿@model IEnumerable<DBMVCFinal.Models.Transaction>
+
+@{
+    ViewBag.Title = "OwnTransactionDetails";
+}
+
+<h2>會員所屬交易紀錄</h2>
+
+<h3>
+    會員編號 : @ViewBag.mId
+</h3>
+<h3>
+    會員名稱 : @ViewBag.Name
+</h3>
+
+<table class="table">
+    <caption><div class="glyphicon glyphicon-user"></div>所屬卡</caption>
+    <thead>
+        <tr>
+            @*<th>@Html.DisplayNameFor(m => m.mId)</th>*@
+            <th>@Html.DisplayNameFor(m => m.tId)</th>
+            <th>@Html.DisplayNameFor(m => m.payment)</th>
+            <th>@Html.DisplayNameFor(m => m.tDate)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody style="background-color: #E7ECE9 ">
+        @foreach (var m in Model)
+        {
+            <tr>
+                @*<td>@Html.DisplayFor(x => m.mId)</td>*@
+                <td>@Html.DisplayFor(x => m.tId)</td>
+                <td>@Html.DisplayFor(x => m.payment)</td>
+                <td>@Html.DisplayFor(x => m.tDate)</td>
+                <td>
+
+                    @Html.ActionLink("更多資訊", "MoreDetails", "DBFinal", new { tid = m.tId }, htmlAttributes: new { @style = "background-color: #91B0A0; color:white ", @class = "btn btn-default" })
+                    @*@Html.ActionLink("刪除", "Delete", new { id = m.tId }, htmlAttributes: new { @class = "btn btn-danger" })*@
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+    </tfoot>
+</table>
+<p>
+    @Html.ActionLink("返回卡片資訊", "UserOwnCard", "Card", null, htmlAttributes: new { @style = "background-color: #91B0A0; color:white ", @class = "btn btn-default" })
+    @Html.ActionLink("新增交易紀錄", "CreateDetail", "DBFinal", null, htmlAttributes: new { @style = "background-color: #91B0A0; color:white ", @class = "btn btn-default" })
+</p>
+
+@section topCSS{
+    <style>
+
+        body {
+            background-color: #CDD5D1;
+        }
+
+        /*設定caption*/
+        .table > caption {
+            margin-top: 10px;
+            color: white;
+            background-color: #698581;
+            font-size: xx-large;
+        }
+
+        /*設定thead顏色*/
+        .table > thead > tr {
+            color: white;
+            background-color: #809B8E;
+        }
+
+        /*設定tfoot顏色及文字對齊*/
+        .table > tfoot > tr {
+            color: white;
+            background-color: #698581;
+        }
+
+        /*設定文字對齊*/
+        .table > caption, .table > thead > tr > th, .table > tfoot > tr {
+            text-align: center;
+        }
+    </style>
+}

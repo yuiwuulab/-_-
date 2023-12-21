@@ -1,0 +1,32 @@
+﻿@model DBMVCFinal.Models.Member
+
+@{
+
+    ViewBag.Title = "Login";
+
+}
+
+
+@ViewBag.Err
+
+<h2>帳號登入</h2>
+
+
+<form action="@Url.Action("Login")" method="post">
+
+
+    @Html.LabelFor(m => m.name) @Html.EditorFor(m => m.name)<br />
+    @Html.LabelFor(m => m.password) @Html.EditorFor(m => m.password, new { htmlAttributes = new { @type = "password" } })<br />
+
+
+    <input type="submit" value="登入" class="btn btn-primary" style= "background-color: #91B0A0; color:white " />
+
+</form>
+@section topCSS{
+    <style>
+
+        body {
+            background-color: #CDD5D1;
+        }
+    </style>
+}

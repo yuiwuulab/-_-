@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - 第E組資料庫期末Project</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("topCSS", required: false)
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @if (Convert.ToBoolean(Session["isManager"]) == true && User.Identity.IsAuthenticated)
+                {
+                    @Html.ActionLink("小卡紀錄系統", "MemberIndex", "Member", new { area = "" }, new { @class = "navbar-brand" })
+                }
+                else if (Convert.ToBoolean(Session["isManager"]) == false && User.Identity.IsAuthenticated)
+                {
+                    @Html.ActionLink("小卡紀錄系統", "UserOwnCard", "Card", new { area = "" }, new { @class = "navbar-brand" })
+                }
+                else
+                {
+                    @Html.ActionLink("小卡紀錄系統", "Warning", "Member", new { area = "" }, new { @class = "navbar-brand" })
+                }
+
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        @{ if (!User.Identity.IsAuthenticated)
+                            {
+
+                                @Html.ActionLink("註冊會員", "SignIn", "Member")
+                            }
+
+                        }
+                    </li>
+
+                    @if (User.Identity.IsAuthenticated && Convert.ToBoolean(Session["isManager"]) == true )
+                    {
+                        <li>
+                            @Html.ActionLink("卡片資訊", "CardIndex", "AllCard")
+                        </li>
+                    }
+
+                    @{ if (User.Identity.IsAuthenticated)
+                        {
+                            <li>
+                                @Html.ActionLink("查詢", "Search", "Card")
+                            </li>
+
+
+                                        <li>
+                                            @if (Convert.ToBoolean(Session["isManager"]) == true)
+                                            {
+                                                @Html.ActionLink("管理者", "NavBarMemberDetails", "Member")
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink("使用者", "NavBarMemberDetails", "Member")
+                                            }
+
+                                        </li>
+                            
+
+                        }
+
+                    }
+
+                 
+
+
+
+                    <li>
+                        @{ if (User.Identity.IsAuthenticated)
+                            {
+
+                                @Html.ActionLink("Logout", "LogOut", "Member")
+
+                            }
+                            else
+                            {
+
+                                @Html.ActionLink("Login", "Login", "Member")
+
+
+                                @*@Html.Raw("<li ><a href='Login'> Login </a></li>")*@
+                            }
+                        }
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - 第E組資料庫期末Project</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

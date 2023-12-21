@@ -1,0 +1,66 @@
+﻿@model IEnumerable<DBMVCFinal.Models.Member>
+@{
+    ViewBag.Title = "SearchResult";
+}
+
+<h2>查詢結果</h2>
+
+<table class="table">
+    <caption><div class="glyphicon glyphicon-user"></div>擁有這張卡片的人</caption>
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(m => m.name)</th>
+            <th>@Html.DisplayNameFor(m => m.email)</th>
+            <th>@Html.DisplayNameFor(m => m.phone)</th>
+        </tr>
+    </thead>
+    <tbody style="background-color: #E7ECE9 ">
+        @foreach (var m in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(x => m.name)</td>
+                <td>@Html.DisplayFor(x => m.email)</td>
+                <td>@Html.DisplayFor(x => m.phone)</td>
+            </tr>
+        }
+    </tbody>
+    @*<tfoot>
+        <tr>
+            <td colspan="7"></td>
+        </tr>
+    </tfoot>*@
+</table>
+
+@section topCSS{
+    <style>
+
+        body {
+            background-color: #CDD5D1;
+        }
+
+        /*設定caption*/
+        .table > caption {
+            margin-top: 10px;
+            color: white;
+            background-color: #698581;
+            font-size: xx-large;
+        }
+
+        /*設定thead顏色*/
+        .table > thead > tr {
+            color: white;
+            background-color: #809B8E;
+        }
+
+        /*設定tfoot顏色及文字對齊*/
+        .table > tfoot > tr {
+            color: white;
+            background-color: #698581;
+        }
+
+        /*設定文字對齊*/
+        .table > caption, .table > thead > tr > th, .table > tfoot > tr {
+            text-align: center;
+        }
+    </style>
+}

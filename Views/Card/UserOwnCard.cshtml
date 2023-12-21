@@ -1,0 +1,91 @@
+﻿@*@model IEnumerable<DBFinalMVC.ViewModels.MOCModel>*@
+@model DBMVCFinal.ViewModels.MOCModel
+
+@{
+    ViewBag.Title = "UserOwnCard";
+
+}
+
+<h2>會員所屬卡</h2>
+
+
+<h3>
+    會員編號 : @ViewBag.MemberId
+</h3>
+<h3>
+    會員名稱 : @ViewBag.MemberName
+</h3>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>卡片Id</th>
+            <th>卡片名稱</th>
+            <th>卡片數量</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody style="background-color: #E7ECE9 ">
+        @foreach (var item in Model.OwnData)
+        {
+            <tr>
+                <td>@item.cId</td>
+                <td>@item.Card.cName</td>
+                <td>@item.num</td>
+
+            </tr>
+
+        }
+
+    </tbody>
+
+
+</table>
+
+<p>
+    @Html.ActionLink("交易紀錄", "OwnTransactionDetails", "DBFinal", null, htmlAttributes: new { @style = "background-color: #91B0A0; color:white ", @class = "btn btn-default" })
+    @Html.ActionLink("新增擁有的卡片", "UserOwnCreate", null, htmlAttributes: new { @style = "background-color: #91B0A0; color:white ", @class = "btn btn-default" })
+    @Html.ActionLink("查詢卡片販售", "Search", "Card", null, htmlAttributes: new { @style = "background-color: #91B0A0; color:white ", @class = "btn btn-default" })
+
+</p>
+
+@*@Html.ActionLink("交易紀錄", "OwnTransactionDetails", "DBFinal")
+@Html.ActionLink("新增擁有的卡片", "UserOwnCreate")
+@Html.ActionLink("查詢卡片販售", "Search", "Card")*@
+
+@section topCSS{
+    <style>
+
+        body {
+            background-color: #CDD5D1;
+        }
+
+        /*設定caption*/
+        .table > caption {
+            margin-top: 10px;
+            color: white;
+            background-color: #698581;
+            font-size: xx-large;
+        }
+
+        /*設定thead顏色*/
+        .table > thead > tr {
+            color: white;
+            background-color: #809B8E;
+        }
+
+        /*設定tfoot顏色及文字對齊*/
+        .table > tfoot > tr {
+            color: white;
+            background-color: #698581;
+        }
+
+        /*設定文字對齊*/
+        .table > caption, .table > thead > tr > th, .table > tfoot > tr {
+            text-align: center;
+        }
+    </style>
+}

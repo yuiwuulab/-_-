@@ -1,0 +1,108 @@
+﻿@model DBMVCFinal.ViewModels.MTC
+
+@{
+    ViewBag.Title = "CreateDetail";
+}
+
+<h2>新增交易紀錄</h2>
+
+
+<h3>會員編號 : @ViewBag.mid</h3>
+<h3>交易編號 : @ViewBag.TID</h3>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+    @*<div class="form-group">
+            <label class="control-label col-md-2">會員編號</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Transactiondata.tId, new { htmlAttributes = new { @Value = Session["mId"] } })
+                <div class="col-md-10">
+                    <input type="text" value="@ViewBag.mid" class="form-control" />
+            </div>
+        </div>*@
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.tId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.tId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.tId, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Transactiondata.payment, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Transactiondata.payment, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Transactiondata.payment, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Transactiondata.tDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+
+            @Html.EditorFor(model => model.Transactiondata.tDate, new { htmlAttributes = new { @class = "form-control" } })
+            @*<input type="date" name="tDate" class="form-control" />*@
+            @Html.ValidationMessageFor(model => model.Transactiondata.tDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Containdata.cId, htmlAttributes: new { @class = "control-label col-md-2" })
+
+        <div class="col-md-10">
+
+            @Html.EditorFor(model => model.Containdata.cId, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Containdata.cId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Containdata.num, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Containdata.num, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Containdata.num, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Containdata.price, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Containdata.price, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Containdata.price, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @*<div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @Html.ActionLink("回到自己的卡片", "UserOwnCard", null, htmlAttributes: new { @style = "background-color: #91B0A0; color:white ", @class = "btn btn-default" })
+            <input type="submit" value="Create" class="btn btn-default" style="background-color: #5C806C ; color:white" />
+        </div>
+    </div>*@
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @Html.ActionLink("返回個人交易紀錄", "OwnTransactionDetails", null, htmlAttributes: new { @style = "background-color: #91B0A0; color:white ", @class = "btn btn-default" })
+            <input type="submit" value="Create" class="btn btn-default" style="background-color: #5C806C ; color:white" />
+        </div>
+    </div>
+
+
+</div>
+}
+
+
+
+@section topCSS{
+    <style>
+
+        body {
+            background-color: #CDD5D1;
+        }
+    </style>
+}

@@ -1,0 +1,83 @@
+﻿@model IEnumerable<DBMVCFinal.Models.Card>
+@{
+    ViewBag.Title = "CardIndex";
+}
+
+<h2>CardIndex</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                卡片編號
+            </th>
+            <th>
+                卡片名稱
+            </th>
+            <th>
+                變動
+            </th>
+        </tr>
+
+    </thead>
+
+    <tbody style="background-color: #E7ECE9 ">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cName)
+                </td>
+                <td>
+                    @Html.ActionLink("編輯", "CardEdit", new { id = item.cId }, htmlAttributes: new { @style = "background-color: #91B0A0; color:white ", @class = "btn btn-default" })
+                    @Html.ActionLink("刪除", "CardDelete", new { id = item.cId }, htmlAttributes: new { @style = "background-color: #91B0A0; color:white ", @class = "btn btn-default" })
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+
+</table>
+
+<p>
+    @Html.ActionLink("新增卡片", "CardCreate", null, htmlAttributes: new { @style = "background-color: #91B0A0; color:white ", @class = "btn btn-default" })
+</p>
+
+
+@section topCSS{
+    <style>
+
+        body {
+            background-color: #CDD5D1;
+        }
+
+        /*設定caption*/
+        .table > caption {
+            margin-top: 10px;
+            color: white;
+            background-color: #698581;
+            font-size: xx-large;
+        }
+
+        /*設定thead顏色*/
+        .table > thead > tr {
+            color: white;
+            background-color: #809B8E;
+        }
+
+        /*設定tfoot顏色及文字對齊*/
+        .table > tfoot > tr {
+            color: white;
+            background-color: #698581;
+        }
+
+        /*設定文字對齊*/
+        .table > caption, .table > thead > tr > th, .table > tfoot > tr {
+            text-align: center;
+        }
+    </style>
+}

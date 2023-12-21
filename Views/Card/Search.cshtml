@@ -1,0 +1,28 @@
+﻿@model IEnumerable<DBMVCFinal.Models.Card>
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>卡片查詢</h2>
+
+<form action="@Url.Action("SearchResult")" method="post">
+
+    卡片名稱:
+    <select name="cName">
+        @foreach (var m in Model)
+        {
+            <option value="@m.cName">@m.cName</option>
+        }
+    </select>
+    <br /><br />
+    <input type="submit" value="查詢" class="btn btn-default"   style="background-color: #91B0A0; color: white"/>
+</form>
+
+@section topCSS{
+    <style>
+
+        body {
+            background-color: #CDD5D1;
+        }
+    </style>
+}

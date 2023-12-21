@@ -1,0 +1,86 @@
+﻿@model DBMVCFinal.ViewModels.MOCModel
+
+@{
+    ViewBag.Title = "UserOwnCreate";
+}
+
+<h2>UserOwnCreate</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>UserOwnCreate</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <label class="control-label col-md-2">會員編號</label>
+        @*@Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <div class="col-md-10">
+            <input type="text" value="@ViewBag.mid" class="form-control" disabled />
+            @*@Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })*@
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">卡片編號</label>
+        @*@Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <div class="col-md-10">
+            <select name="OwncId">
+                @foreach (var i in Model.CardData)
+                {
+                    <option value="@i.cId">@i.cName</option>
+                }
+            </select>
+            @*@Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })*@
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="control-label col-md-2">數量</label>
+        @*@Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <div class="col-md-10">
+            <select name="OwnNum">
+                @for (int i = 1; i <= 10; i++)
+                {
+                    <option value="@i">@i</option>
+                }
+            </select>
+            @*@Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })*@
+        </div>
+    </div>
+
+    
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @Html.ActionLink("回到自己的卡片", "UserOwnCard", null, htmlAttributes: new { @style = "background-color: #91B0A0; color:white ", @class = "btn btn-default" })
+            <input type="submit" value="Create" class="btn btn-default" style="background-color: #5C806C ; color:white" />
+        </div>
+    </div>
+
+
+</div>
+}
+
+@*<div>
+    @Html.ActionLink("回到自己的卡片", "UserOwnCard")
+</div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+@section topCSS{
+    <style>
+
+        body {
+            background-color: #CDD5D1;
+        }
+    </style>
+}
